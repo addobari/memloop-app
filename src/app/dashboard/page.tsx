@@ -106,7 +106,7 @@ export default function Dashboard() {
             <div>
               <h3 className="text-lg font-semibold">Key Themes</h3>
               <ul className="list-disc ml-5 text-sm">
-                {recap.understanding.themes.map((t: Theme, idx: number) => (
+                {recap?.understanding?.themes?.map((t: Theme, idx: number) => (
                   <li key={idx}>
                     <strong>{t.point}</strong>: {t.why}
                     {t.memoryId && (
@@ -126,7 +126,7 @@ export default function Dashboard() {
             <div>
               <h3 className="text-lg font-semibold mt-4">Memorable Quotes</h3>
               <ul className="space-y-2">
-                {recap.understanding.quotes.slice(0, 5).map((q: Quote, idx: number) => (
+                {recap?.understanding?.quotes?.slice(0, 5).map((q: Quote, idx: number) => (
                   <li key={idx}>
                     <blockquote
                       onClick={() => q.memoryId && scrollToMemory(q.memoryId)}
