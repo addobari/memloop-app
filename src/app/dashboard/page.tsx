@@ -164,7 +164,7 @@ export default function Dashboard() {
                 </div>
               </div>
               <ul className="list-decimal ml-5 text-sm space-y-1">
-                {recap.exports.tweetThread.map((tweet: string, idx: number) => (
+                {recap?.exports?.tweetThread?.map((tweet, idx) => (
                   <li key={idx}>{tweet}</li>
                 ))}
               </ul>
@@ -190,9 +190,11 @@ export default function Dashboard() {
                   </button>
                 </div>
               </div>
-              <p className="bg-gray-100 p-3 rounded text-sm whitespace-pre-wrap">
-                {recap.exports.linkedinRecap}
-              </p>
+              {recap?.exports?.linkedinRecap && (
+                <p className="bg-gray-100 p-3 rounded text-sm whitespace-pre-wrap">
+                    {recap.exports.linkedinRecap}
+                    </p>
+                )}
             </div>
 
             <div>
@@ -216,7 +218,7 @@ export default function Dashboard() {
                 </div>
               </div>
               <ul className="list-disc ml-5 text-sm">
-                {recap.exports.emailFollowUp.map((line: string, idx: number) => (
+                {recap?.exports?.emailFollowUp.map((line: string, idx: number) => (
                   <li key={idx}>{line}</li>
                 ))}
               </ul>
