@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build || true",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint --no-error-on-warn"
+    "lint": "next lint"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",

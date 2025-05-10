@@ -6,9 +6,36 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { ClipboardCopy, Twitter, Linkedin, Mail } from 'lucide-react';
 
+type Memory = {
+  id: string;
+  text: string;
+  name?: string;
+  who?: string;
+  tags?: string;
+  vibe?: string;
+  contact?: string;
+  created_at: string;
+  type?: string;
+};
+
+type Recap = {
+  understanding: {
+    themes: { point: string; why: string; memoryId?: string }[];
+    quotes: { text: string; author?: string; memoryId?: string }[];
+  };
+  exports: {
+    tweetThread: string[];
+    linkedinRecap: string;
+    emailFollowUp: string[];
+  };
+};
+
+type Theme = { point: string; why: string; memoryId?: string };
+type Quote = { text: string; author?: string; memoryId?: string };
+
 export default function Dashboard() {
-  const [memories, setMemories] = useState<any[]>([]);
-  const [recap, setRecap] = useState<any | null>(null);
+  const [memories, setMemories] = useState<Memory[]>([]);
+  const [recap, setRecap] = useState<Recap | null>(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [copied, setCopied] = useState<string>('');
@@ -79,13 +106,13 @@ export default function Dashboard() {
             <div>
               <h3 className="text-lg font-semibold">Key Themes</h3>
               <ul className="list-disc ml-5 text-sm">
-                {recap.understanding.themes.map((t: any, idx: number) => (
+                {recap.understanding.themes.map((t: Theme, idx: number) => (
                   <li key={idx}>
                     <strong>{t.point}</strong>: {t.why}
                     {t.memoryId && (
                       <sup>
                         <button
-                          onClick={() => scrollToMemory(t.memoryId)}
+                          onClick={() => t.memoryId && scrollToMemory(t.memoryId)}
                           className="text-blue-600 hover:underline ml-1"
                         >
                           [{idx + 1}]
@@ -99,10 +126,10 @@ export default function Dashboard() {
             <div>
               <h3 className="text-lg font-semibold mt-4">Memorable Quotes</h3>
               <ul className="space-y-2">
-                {recap.understanding.quotes.slice(0, 5).map((q: any, idx: number) => (
+                {recap.understanding.quotes.slice(0, 5).map((q: Quote, idx: number) => (
                   <li key={idx}>
                     <blockquote
-                      onClick={() => scrollToMemory(q.memoryId)}
+                      onClick={() => q.memoryId && scrollToMemory(q.memoryId)}
                       className="cursor-pointer border-l-4 pl-4 italic text-sm hover:bg-purple-50 hover:text-purple-800 transition"
                     >
                       “{q.text}” — {q.author || 'Anonymous'}

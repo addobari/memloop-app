@@ -65,7 +65,7 @@ ${memoryList}
   try {
     const json = JSON.parse(data.choices?.[0]?.message?.content || '{}');
     return NextResponse.json({ result: json });
-  } catch (e) {
+  } catch {
     console.error('Failed to parse JSON from OpenAI:', data);
     return NextResponse.json({ error: 'Invalid JSON output from AI.' }, { status: 500 });
   }

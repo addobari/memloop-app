@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 
+
 export default function SubmitPage() {
   const [text, setText] = useState('');
   const [name, setName] = useState('');
